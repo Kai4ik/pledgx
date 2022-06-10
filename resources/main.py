@@ -1,3 +1,4 @@
+from urllib import response
 from flask_restful import Resource
 from flask import request, jsonify
 from datetime import datetime, timezone, timedelta
@@ -60,30 +61,33 @@ class Home(Resource):
                 # Signature has expired
                 return jsonify({"errorMessage": "Token has expired"})
         else:
-            return jsonify({"message": "no previous login"})
+            response = jsonify({"message": "no previous login"}))
+            response.headers.add(
+                'Access-Control-Allow-Origin', 'http://localhost:3000')
+            return response({"message": "no previous login"})
 
     def post(self):
         from server import mysql, app
-        errors = createUserSchema.validate(request.form)
+        errors=createUserSchema.validate(request.form)
         if errors:
             return jsonify({"errorMessage": errors})
         else:
-            userDetails = request.form
-            firstName = userDetails['firstName']
-            lastName = userDetails['lastName']
-            phoneNumber = userDetails['phoneNumber']
-            jobTitle = userDetails['jobTitle']
-            country = userDetails['country']
+            userDetails=request.form
+            firstName=userDetails['firstName']
+            lastName=userDetails['lastName']
+            phoneNumber=userDetails['phoneNumber']
+            jobTitle=userDetails['jobTitle']
+            country=userDetails['country']
 
-            cursor = mysql.connection.cursor()
-            rowExists = checkRowExistence(cursor, userDetails)
+            cursor=mysql.connection.cursor()
+            rowExists=checkRowExistence(cursor, userDetails)
 
             if (rowExists[0] == False):
                 cursor.execute(''' INSERT INTO users(fName, lName, jobTitle, phoneNumber, country) VALUES (%s, %s, %s, %s, %s)''',
                                (firstName, lastName, jobTitle, phoneNumber, country))
                 mysql.connection.commit()
                 cursor.close()
-                encodedToken = generateToken(
+                encodedToken=generateToken(
                     app, firstName, lastName, jobTitle, phoneNumber, country)
 
                 return jsonify({'token': encodedToken})
