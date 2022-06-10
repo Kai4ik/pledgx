@@ -64,7 +64,7 @@ class Home(Resource):
             response = jsonify({"message": "no previous login"}))
             response.headers.add(
                 'Access-Control-Allow-Origin', 'http://localhost:3000')
-            return response({"message": "no previous login"})
+            return response
 
     def post(self):
         from server import mysql, app
