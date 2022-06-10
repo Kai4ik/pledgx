@@ -24,7 +24,7 @@ api.add_resource(Home, '/', )
 
 @app.after_request
 def apply_caching(response):
-    response.headers["Access-Control-Allow-Origin"] = "http://localhost:3000"
+    response.headers["Access-Control-Allow-Origin"] = "https://pledgx-frontend.netlify.app/"
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
     return response
