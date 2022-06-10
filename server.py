@@ -32,6 +32,3 @@ def apply_caching(response):
 
 if (__name__ == "__main__"):
     app.run()
-
-# qwopaskl1290=
-# Kai4ik
