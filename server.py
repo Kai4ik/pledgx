@@ -25,6 +25,7 @@ api.add_resource(Home, '/', )
 @app.after_request
 def apply_caching(response):
     response.headers["Access-Control-Allow-Origin"] = "http://localhost:3000"
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT'
     return response
 
 
