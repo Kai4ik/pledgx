@@ -65,7 +65,7 @@ class Home(Resource):
 
     def post(self):
         from server import mysql, app
-        errors = createUserSchema.validate(request.form)
+        errors = createUserSchema.validate(request.json)
         if errors:
             return jsonify({"errorMessage": errors})
         else:
@@ -93,11 +93,11 @@ class Home(Resource):
 
     def put(self):
         from server import mysql, app
-        errors = createUserSchema.validate(request.form)
+        errors = createUserSchema.validate(request.json)
         if errors:
             return jsonify({"errorMessage": errors})
         else:
-            newUserDetails = request.form
+            newUserDetails = request.json
             firstName = newUserDetails['firstName']
             lastName = newUserDetails['lastName']
             phoneNumber = newUserDetails['phoneNumber']
