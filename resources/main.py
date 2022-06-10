@@ -69,7 +69,7 @@ class Home(Resource):
         if errors:
             return jsonify({"errorMessage": errors})
         else:
-            userDetails = request.form
+            userDetails = request.json
             firstName = userDetails['firstName']
             lastName = userDetails['lastName']
             phoneNumber = userDetails['phoneNumber']
