@@ -21,6 +21,13 @@ api = Api(app)
 
 api.add_resource(Home, '/', )
 
+
+@app.after_request
+def apply_caching(response):
+    response.headers["Access-Control-Allow-Origin"] = "http://localhost:3000"
+    return response
+
+
 if (__name__ == "__main__"):
     app.run()
 

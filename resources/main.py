@@ -61,10 +61,7 @@ class Home(Resource):
                 # Signature has expired
                 return jsonify({"errorMessage": "Token has expired"})
         else:
-            response = jsonify({"message": "no previous login"})
-            response.headers.add(
-                'Access-Control-Allow-Origin', 'http://localhost:3000')
-            return response
+            return jsonify({"message": "no previous login"})
 
     def post(self):
         from server import mysql, app
